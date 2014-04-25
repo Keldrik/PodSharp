@@ -1,38 +1,81 @@
 ﻿<Window x:Class="PodSharpWPFTestApp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="600" Width="800" Background="WhiteSmoke">
+        Title="PodSharp TestApp" Height="600" Width="800" Background="WhiteSmoke">
     <Grid>
         <TextBox x:Name="feedurlInput" HorizontalAlignment="Left" Height="23" Margin="21,34,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="320"/>
         <Label Content="FeedToCheck:" HorizontalAlignment="Left" Margin="21,10,0,0" VerticalAlignment="Top"/>
         <Button Content="Check" HorizontalAlignment="Left" Margin="355,34,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
-        <Label Content="Podcast Meta:" HorizontalAlignment="Left" Margin="21,74,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <Label Content="Title:" HorizontalAlignment="Left" Margin="178,121,0,0" VerticalAlignment="Top"/>
-        <Label Content="{Binding Title}" HorizontalAlignment="Left" Margin="271,121,0,0" VerticalAlignment="Top" Width="200"/>
-        <Label Content="ImageURL:" HorizontalAlignment="Left" Margin="178,214,0,0" VerticalAlignment="Top"/>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="271,214,0,0" VerticalAlignment="Top" Width="200"/>
-        <Label Content="WebSite:" HorizontalAlignment="Left" Margin="178,183,0,0" VerticalAlignment="Top"/>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="271,183,0,0" VerticalAlignment="Top" Width="200"/>
-        <Label Content="Author:" HorizontalAlignment="Left" Margin="178,152,0,0" VerticalAlignment="Top"/>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="271,152,0,0" VerticalAlignment="Top" Width="200"/>
-        <Label Content="Language:" HorizontalAlignment="Left" Margin="178,245,0,0" VerticalAlignment="Top"/>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="271,245,0,0" VerticalAlignment="Top" Width="200"/>
-        <Label Content="LastBuild:" HorizontalAlignment="Left" Margin="178,307,0,0" VerticalAlignment="Top"/>
-        <Label Content="{Binding Subtitle}" HorizontalAlignment="Left" Margin="189,398,0,0" VerticalAlignment="Top" Width="300"/>
-        <Label Content="Subtitle:" HorizontalAlignment="Left" Margin="178,367,0,0" VerticalAlignment="Top"/>
-        <Label Content="{Binding LastBuild}" HorizontalAlignment="Left" Margin="271,307,0,0" VerticalAlignment="Top" Width="200"/>
-        <Label Content="Copyright:" HorizontalAlignment="Left" Margin="178,276,0,0" VerticalAlignment="Top"/>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="271,276,0,0" VerticalAlignment="Top" Width="200"/>
-        <Label Content="Summary:" HorizontalAlignment="Left" Margin="178,442,0,0" VerticalAlignment="Top"/>
-        <Image Source="{Binding ImageURI}" HorizontalAlignment="Left" Height="150" Margin="10,121,0,0" VerticalAlignment="Top" Width="150"/>
-        <TextBlock HorizontalAlignment="Left" Margin="189,473,0,0" TextWrapping="Wrap" Text="{Binding Summary}" VerticalAlignment="Top" Height="86" Width="300"/>
-        <TabControl HorizontalAlignment="Left" Height="366" Margin="531,121,0,0" VerticalAlignment="Top" Width="231">
-            <TabItem Header="TabItem">
-                <Grid Background="#FFE5E5E5"/>
+
+        <TabControl HorizontalAlignment="Left" Height="487" Margin="10,72,0,0" VerticalAlignment="Top" Width="772">
+            <TabItem Header="Podcast Meta">
+
+                <Grid Background="#FFE5E5E5">
+
+                    <Label Content="Title:" HorizontalAlignment="Left" Margin="178,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <Label Content="{Binding Title}" HorizontalAlignment="Left" Margin="271,10,0,0" VerticalAlignment="Top" Width="200"/>
+                    <Label Content="WebSite:" HorizontalAlignment="Left" Margin="178,72,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <Label Content="{Binding Website}" HorizontalAlignment="Left" Margin="271,72,0,0" VerticalAlignment="Top" Width="200"/>
+                    <Label Content="Author:" HorizontalAlignment="Left" Margin="178,41,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <Label Content="{Binding Author}" HorizontalAlignment="Left" Margin="271,41,0,0" VerticalAlignment="Top" Width="200"/>
+                    <Label Content="Language:" HorizontalAlignment="Left" Margin="178,134,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <Label Content="{Binding Language}" HorizontalAlignment="Left" Margin="271,134,0,0" VerticalAlignment="Top" Width="200"/>
+                    <Label Content="LastBuild:" HorizontalAlignment="Left" Margin="178,196,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <Label Content="{Binding Subtitle}" HorizontalAlignment="Left" Margin="189,287,0,0" VerticalAlignment="Top" Width="300"/>
+                    <Label Content="Subtitle:" HorizontalAlignment="Left" Margin="178,256,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <Label Content="{Binding LastBuild}" HorizontalAlignment="Left" Margin="271,196,0,0" VerticalAlignment="Top" Width="200"/>
+                    <Label Content="Copyright:" HorizontalAlignment="Left" Margin="178,165,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <Label Content="{Binding Copyright}" HorizontalAlignment="Left" Margin="271,165,0,0" VerticalAlignment="Top" Width="200"/>
+                    <Label Content="Summary:" HorizontalAlignment="Left" Margin="178,315,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="189,346,0,0" TextWrapping="Wrap" Text="{Binding Summary}" VerticalAlignment="Top" Height="103" Width="300"/>
+
+                    <Grid Width="150" Height="150" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Background="#FF686868">
+                        <Image Source="{Binding ImageURI}" HorizontalAlignment="Left" Height="150" VerticalAlignment="Top" Width="150"/>
+                    </Grid>
+
+                </Grid>
+
             </TabItem>
-            <TabItem Header="TabItem">
-                <Grid Background="#FFE5E5E5"/>
+
+            <TabItem Header="Episodes">
+                <Grid Background="#FFE5E5E5">
+                    
+                    <ListBox HorizontalAlignment="Left" Height="439" Margin="536,10,0,0" VerticalAlignment="Top" Width="220" ItemsSource="{Binding Episodes}" SelectedItem="{Binding Episode, Mode=TwoWay}">
+                        
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Label Content="{Binding Title}"></Label>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                        
+                    </ListBox>
+                    
+                    <Label Content="Title:" HorizontalAlignment="Left" Margin="25,19,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <Label Content="{Binding EpisodeTitle}" HorizontalAlignment="Left" Margin="94,19,0,0" VerticalAlignment="Top" Width="300"/>
+
+                    <Label Content="GUID:" HorizontalAlignment="Left" Margin="25,50,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <Label Content="{Binding EpisodeGUID}" HorizontalAlignment="Left" Margin="94,50,0,0" VerticalAlignment="Top" Width="300"/>
+
+
+                    <Label Content="PubDate:" HorizontalAlignment="Left" Margin="25,81,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <Label Content="{Binding EpisodePubDate}" HorizontalAlignment="Left" Margin="94,81,0,0" VerticalAlignment="Top" Width="300"/>
+
+                    <Label Content="MediaURL:" HorizontalAlignment="Left" Margin="25,112,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <Label Content="{Binding EpisodeMediaURL}" HorizontalAlignment="Left" Margin="94,112,0,0" VerticalAlignment="Top" Width="300"/>
+
+                    <Label Content="Subtitle:" HorizontalAlignment="Left" Margin="25,166,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <Label Content="{Binding EpisodeSubtitle}" HorizontalAlignment="Left" Margin="101,166,0,0" VerticalAlignment="Top" Width="300"/>
+
+                    <Label Content="Summary:" HorizontalAlignment="Left" Margin="25,212,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="101,212,0,0" TextWrapping="Wrap" Text="{Binding EpisodeSummary}" VerticalAlignment="Top" Height="150" Width="300"/>
+
+
+
+                </Grid>
             </TabItem>
+
         </TabControl>
 
     </Grid>

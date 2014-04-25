@@ -1,5 +1,7 @@
-﻿using System;
+﻿using PodSharp.Model;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -9,6 +11,99 @@ namespace PodSharpWPFTestApp
 {
     class FeedToCheckVM : INotifyPropertyChanged
     {
+        public FeedToCheckVM()
+        {
+            Episodes = new ObservableCollection<Episode>();
+        }
+
+        public ObservableCollection<Episode> Episodes { get; set; }
+
+        private Episode _Episode;
+        public Episode Episode
+        {
+            get { return _Episode; }
+            set
+            {
+                _Episode = value;
+                NotifyPropertyChanged("Episode");
+
+                //
+                EpisodeTitle = Episode.Title;
+                EpisodeGUID = Episode.GUID;
+                EpisodePubDate = Episode.PubDate.ToShortDateString();
+                EpisodeMediaURL = Episode.MediaContent.URL;
+                EpisodeSubtitle = Episode.Subtitle;
+                EpisodeSummary = Episode.Summary;
+
+            }
+        }
+
+        private string _EpisodeSubtitle;
+        public string EpisodeSubtitle
+        {
+            get { return _EpisodeSubtitle; }
+            set
+            {
+                _EpisodeSubtitle = value;
+                NotifyPropertyChanged("EpisodeSubtitle");
+            }
+        }
+
+        private string _EpisodeSummary;
+        public string EpisodeSummary
+        {
+            get { return _EpisodeSummary; }
+            set
+            {
+                _EpisodeSummary = value;
+                NotifyPropertyChanged("EpisodeSummary");
+            }
+        }
+
+        private string _EpisodeMediaURL;
+        public string EpisodeMediaURL
+        {
+            get { return _EpisodeMediaURL; }
+            set
+            {
+                _EpisodeMediaURL = value;
+                NotifyPropertyChanged("EpisodeMediaURL");
+            }
+        }
+
+        private string _EpisodeTitle;
+        public string EpisodeTitle
+        {
+            get { return _EpisodeTitle; }
+            set
+            {
+                _EpisodeTitle = value;
+                NotifyPropertyChanged("EpisodeTitle");
+            }
+        }
+
+        private string _EpisodeGUID;
+        public string EpisodeGUID
+        {
+            get { return _EpisodeGUID; }
+            set
+            {
+                _EpisodeGUID = value;
+                NotifyPropertyChanged("EpisodeGUID");
+            }
+        }
+
+        private string _EpisodePubDate;
+        public string EpisodePubDate
+        {
+            get { return _EpisodePubDate; }
+            set
+            {
+                _EpisodePubDate = value;
+                NotifyPropertyChanged("EpisodePubDate");
+            }
+        }
+
         private string _Title;
         public string Title
         {

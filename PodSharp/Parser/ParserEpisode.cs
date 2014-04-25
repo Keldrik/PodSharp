@@ -47,7 +47,7 @@ namespace PodSharp.Parser
                 episode.Description = eraw.Description;
                 if (PodHelper.CheckTextForHtmlEncode(episode.Description))
                 {
-                    System.Net.WebUtility.HtmlDecode(episode.Description);
+                    episode.Description = System.Net.WebUtility.HtmlDecode(episode.Description);
                 }
                 episode.DescriptionContainsMarkup = PodHelper.CheckTextForMarkup(episode.Description);
             }
@@ -57,13 +57,28 @@ namespace PodSharp.Parser
                 episode.Content = eraw.ContentEncoded;
                 if (PodHelper.CheckTextForHtmlEncode(episode.Content))
                 {
-                    System.Net.WebUtility.HtmlDecode(episode.Content);
+                    episode.Content = System.Net.WebUtility.HtmlDecode(episode.Content);
                 }
                 episode.ContentContainsMarkup = PodHelper.CheckTextForMarkup(episode.Content);
             }
 
-            episode.Subtitle = eraw.ItunesSubtitle;
-            episode.Summary = eraw.ItunesSummary;
+            if (!string.IsNullOrEmpty(eraw.ItunesSubtitle))
+            {
+                episode.Subtitle = eraw.ItunesSubtitle;
+                if (PodHelper.CheckTextForHtmlEncode(episode.Subtitle))
+                {
+                    episode.Subtitle = System.Net.WebUtility.HtmlDecode(episode.Subtitle);
+                }
+            }
+
+            if (!string.IsNullOrEmpty(eraw.ItunesSummary))
+            {
+                episode.Summary = eraw.ItunesSummary;
+                if (PodHelper.CheckTextForHtmlEncode(episode.Summary))
+                {
+                    episode.Summary = System.Net.WebUtility.HtmlDecode(episode.Summary);
+                }
+            }
 
             episode.Keywords = eraw.ItunesKeywords;
 
