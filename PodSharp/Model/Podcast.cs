@@ -12,9 +12,17 @@ namespace PodSharp.Model
 		public string FeedURL { get; set; }
 		public string WebsiteURL { get; set; }
 		public string ImageURL { get; set; }
+        public Uri ImageURI { get; set; }
 		public string Language { get; set; }
 		public string Copyright { get; set; }
 		public DateTime LastBuild { get; set; }
+        public string LastBuildString
+        {
+            get
+            {
+                return LastBuild.ToLocalTime().Date.ToString();
+            }
+        }
 
 		public List<AlternateFeed> FeedAlt { get; set; }
 		public bool HasFeedAlt

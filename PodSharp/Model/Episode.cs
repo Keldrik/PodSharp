@@ -11,6 +11,13 @@ namespace PodSharp.Model
         public string GUID { get; set; }
         public string WebsiteURL { get; set; }
         public DateTime PubDate { get; set; }
+        public string PubDateString
+        {
+            get
+            {
+                return PubDate.ToLocalTime().Date.ToString();
+            }
+        }
 
         public string Description { get; set; }
         public bool DescriptionContainsMarkup { get; set; }

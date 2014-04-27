@@ -23,12 +23,14 @@ namespace PodSharp.Parser
             if (!string.IsNullOrEmpty(praw.ItunesImageURL))
             {
                 podcast.ImageURL = praw.ItunesImageURL.ToLower();
+                podcast.ImageURI = new Uri(podcast.ImageURL);
             }
             else
             {
                 if (!string.IsNullOrEmpty(praw.ImageURL))
                 {
                     podcast.ImageURL = praw.ImageURL.ToLower();
+                    podcast.ImageURI = new Uri(podcast.ImageURL);
                 }
             }
 
