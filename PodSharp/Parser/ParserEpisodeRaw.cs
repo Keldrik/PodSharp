@@ -110,7 +110,7 @@ namespace PodSharp.Parser
                     break;
 
                 case "{" + FeedNamespaceCollection.itunes + "}keywords":
-                    if (e.Value != "")
+                    if (!e.IsEmpty)
                     {
                         if (episode.ItunesKeywords == null)
                         {
@@ -120,7 +120,10 @@ namespace PodSharp.Parser
                         string[] kk = k.Split(',');
                         foreach (var kkk in kk)
                         {
-                            episode.ItunesKeywords.Add(kkk.Trim().ToLower());
+                            if (!string.IsNullOrEmpty(kkk))
+                            {
+                                episode.ItunesKeywords.Add(kkk.Trim().ToLower());
+                            }
                         }
                     }
                     break;

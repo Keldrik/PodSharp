@@ -40,18 +40,51 @@ namespace PodSharp
         public async Task<Podcast> GetNewPodcastAsync(string url)
         {
             PodcastRaw praw = await GetNewPodcastRawAsync(url);
+            praw.Episodes.AddRange(await GetNextpageEpisodeList(praw));
 
             ParserPodcast pparse = new ParserPodcast();
             ParserEpisode eparse = new ParserEpisode();
 
             Podcast podcast = pparse.ParsePodcast(praw);
 
-            if (praw.Episodes != null && praw.Episodes.Count > 0)
+            if (praw.Episodes.Count > 0)
             {
                 podcast.Episodes = eparse.ParseEpisodeList(praw.Episodes);
+
+                if (podcast.HasFeedAlt)
+                {
+                    List<EpisodeRaw> altepisodes = new List<EpisodeRaw>();
+                    foreach (var af in podcast.FeedAlt)
+                    {
+                        PodcastRaw pr = await GetNewPodcastRawAsync(af.URL);
+                        pr.Episodes.AddRange(await GetNextpageEpisodeList(pr));
+                        altepisodes.AddRange(pr.Episodes);
+                    }
+                    foreach (var e in podcast.Episodes)
+                    {
+                        e.MediaContentAlt = new List<MediaItem>();
+                        foreach (var i in altepisodes.Where(x => x.guid == e.GUID))
+                        {
+                            e.MediaContentAlt.Add(eparse.ParseMediaItem(i));
+                        }
+                    }
+                }
             }
 
             return podcast;
+        }
+
+        private async Task<List<EpisodeRaw>> GetNextpageEpisodeList(PodcastRaw praw)
+        {
+            List<EpisodeRaw> episodes = new List<EpisodeRaw>();
+            string next = praw.LinkFeedNextPageURL;
+            while (!string.IsNullOrEmpty(next))
+            {
+                PodcastRaw p = await GetNewPodcastRawAsync(next);
+                episodes.AddRange(p.Episodes);
+                next = p.LinkFeedNextPageURL;
+            }
+            return episodes;
         }
     }
 }

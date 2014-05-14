@@ -124,7 +124,7 @@ namespace PodSharp.Parser
             return episode;
         }
 
-        private MediaItem ParseMediaItem(EpisodeRaw eraw)
+        public MediaItem ParseMediaItem(EpisodeRaw eraw)
         {
             MediaItem item = new MediaItem();
 

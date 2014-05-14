@@ -14,18 +14,25 @@
 
                     <Label Content="Title:" HorizontalAlignment="Left" Margin="178,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                     <Label Content="{Binding Podcast.Title}" HorizontalAlignment="Left" Margin="271,10,0,0" VerticalAlignment="Top" Width="200"/>
+                    
                     <Label Content="WebSite:" HorizontalAlignment="Left" Margin="178,72,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                     <Label Content="{Binding Podcast.Website}" HorizontalAlignment="Left" Margin="271,72,0,0" VerticalAlignment="Top" Width="200"/>
+                    
                     <Label Content="Author:" HorizontalAlignment="Left" Margin="178,41,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                     <Label Content="{Binding Podcast.Author}" HorizontalAlignment="Left" Margin="271,41,0,0" VerticalAlignment="Top" Width="200"/>
+                    
                     <Label Content="Language:" HorizontalAlignment="Left" Margin="178,134,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                     <Label Content="{Binding Podcast.Language}" HorizontalAlignment="Left" Margin="271,134,0,0" VerticalAlignment="Top" Width="200"/>
+                    
                     <Label Content="LastBuild:" HorizontalAlignment="Left" Margin="178,196,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <Label Content="{Binding Podcast.LastBuildString}" HorizontalAlignment="Left" Margin="271,196,0,0" VerticalAlignment="Top" Width="200"/>
+                    
                     <Label Content="{Binding Podcast.Subtitle}" HorizontalAlignment="Left" Margin="189,287,0,0" VerticalAlignment="Top" Width="300"/>
                     <Label Content="Subtitle:" HorizontalAlignment="Left" Margin="178,256,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                    <Label Content="{Binding Podcast.LastBuildString}" HorizontalAlignment="Left" Margin="271,196,0,0" VerticalAlignment="Top" Width="200"/>
+                    
                     <Label Content="Copyright:" HorizontalAlignment="Left" Margin="178,165,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                     <Label Content="{Binding Podcast.Copyright}" HorizontalAlignment="Left" Margin="271,165,0,0" VerticalAlignment="Top" Width="200"/>
+                    
                     <Label Content="Summary:" HorizontalAlignment="Left" Margin="178,315,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                     <TextBlock HorizontalAlignment="Left" Margin="189,346,0,0" TextWrapping="Wrap" Text="{Binding Podcast.Summary}" VerticalAlignment="Top" Height="103" Width="300"/>
 
@@ -58,7 +65,6 @@
                     <Label Content="GUID:" HorizontalAlignment="Left" Margin="25,50,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                     <Label Content="{Binding SelectedEpisode.GUID}" HorizontalAlignment="Left" Margin="94,50,0,0" VerticalAlignment="Top" Width="300"/>
 
-
                     <Label Content="PubDate:" HorizontalAlignment="Left" Margin="25,81,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                     <Label Content="{Binding SelectedEpisode.PubDateString}" HorizontalAlignment="Left" Margin="94,81,0,0" VerticalAlignment="Top" Width="300"/>
 
@@ -70,8 +76,6 @@
 
                     <Label Content="Summary:" HorizontalAlignment="Left" Margin="25,212,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                     <TextBlock HorizontalAlignment="Left" Margin="101,212,0,0" TextWrapping="Wrap" Text="{Binding SelectedEpisode.Summary}" VerticalAlignment="Top" Height="150" Width="300"/>
-
-
 
                 </Grid>
             </TabItem>
