@@ -31,7 +31,7 @@ namespace PodSharpWPFTestApp
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
             CheckButton.Visibility = System.Windows.Visibility.Collapsed;
-            vm.LoadPodcast(await reader.GetNewPodcastAsync(feedurlInput.Text));
+            vm.LoadPodcast(await reader.GetPodcastAsync(feedurlInput.Text));
             CheckButton.Visibility = System.Windows.Visibility.Visible;
         }
     }

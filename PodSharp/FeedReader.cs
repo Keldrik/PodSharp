@@ -12,21 +12,21 @@ namespace PodSharp
 {
     public class FeedReader
     {
-        private async Task<XElement> LoadFeedFromWebAsync(string url)
+        private async Task<XElement> LoadWebFeedAsync(string url)
         {
             var request = HttpWebRequest.CreateHttp(url);
             var response = await request.GetResponseAsync();
             return XElement.Load(response.GetResponseStream());
         }
 
-        public async Task<PodcastRaw> GetNewPodcastRawAsync(string url)
+        public async Task<PodcastRaw> GetPodcastRawAsync(string url)
         {
             PodcastRaw podcast = new PodcastRaw();
             podcast.LinkFeedURL = url.ToLower();
             ParserPodcastRaw pparse = new ParserPodcastRaw();
             ParserEpisodeRaw eparse = new ParserEpisodeRaw();
 
-            XElement root = await LoadFeedFromWebAsync(url);
+            XElement root = await LoadWebFeedAsync(url);
 
             var channel = root.Descendants("channel").FirstOrDefault();
             podcast = pparse.ParseNewPodcast(channel);
@@ -37,10 +37,10 @@ namespace PodSharp
             return podcast;
         }
 
-        public async Task<Podcast> GetNewPodcastAsync(string url)
+        public async Task<Podcast> GetPodcastAsync(string url)
         {
-            PodcastRaw praw = await GetNewPodcastRawAsync(url);
-            praw.Episodes.AddRange(await GetNextpageEpisodeList(praw));
+            PodcastRaw praw = await GetPodcastRawAsync(url);
+            praw.Episodes.AddRange(await MultipageEpisodeListAsync(praw));
 
             ParserPodcast pparse = new ParserPodcast();
             ParserEpisode eparse = new ParserEpisode();
@@ -56,8 +56,8 @@ namespace PodSharp
                     List<EpisodeRaw> altepisodes = new List<EpisodeRaw>();
                     foreach (var af in podcast.FeedAlt)
                     {
-                        PodcastRaw pr = await GetNewPodcastRawAsync(af.URL);
-                        pr.Episodes.AddRange(await GetNextpageEpisodeList(pr));
+                        PodcastRaw pr = await GetPodcastRawAsync(af.URL);
+                        pr.Episodes.AddRange(await MultipageEpisodeListAsync(pr));
                         altepisodes.AddRange(pr.Episodes);
                     }
                     foreach (var e in podcast.Episodes)
@@ -74,13 +74,13 @@ namespace PodSharp
             return podcast;
         }
 
-        private async Task<List<EpisodeRaw>> GetNextpageEpisodeList(PodcastRaw praw)
+        private async Task<List<EpisodeRaw>> MultipageEpisodeListAsync(PodcastRaw praw)
         {
             List<EpisodeRaw> episodes = new List<EpisodeRaw>();
             string next = praw.LinkFeedNextPageURL;
             while (!string.IsNullOrEmpty(next))
             {
-                PodcastRaw p = await GetNewPodcastRawAsync(next);
+                PodcastRaw p = await GetPodcastRawAsync(next);
                 episodes.AddRange(p.Episodes);
                 next = p.LinkFeedNextPageURL;
             }
